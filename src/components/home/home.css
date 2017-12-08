@@ -1,0 +1,13 @@
+.homecontainer h1{
+    margin-left: 35%;
+    /* transform: translateX(-25%); */
+}
+
+.bodycontainer {
+    height: 80vh;
+    width: 100%;
+    background: blue;
+}
+
+
+

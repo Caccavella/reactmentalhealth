@@ -29,11 +29,11 @@ passport.use(new Auth0Strategy({
 }, function (accessToken, refreshToken, extraParams, profile, done) {
     console.log(profile)
     const db = app.get('db');
-    db.find_user(profile.id).then(user => {
+    db.findsessionuser(profile.id).then(user => {
         if (user[0]) {
             return done(null, user);
         } else {
-            db.create_user([profile.displayName, profile.emails[0].value, profile.picture, profile.id])
+            db.createuser([profile.displayName, profile.emails[0].value, profile.picture, profile.id])
                 .then(user => {
                     return done(null, user[0]);
                 })
@@ -53,7 +53,7 @@ passport.deserializeUser(function (user, done) {
 })
 app.get('/auth', passport.authenticate('auth0'));
 app.get('/auth/callback', passport.authenticate('auth0', {
-    successRedirect: 'http://localhost:3000/#/private/',
+    successRedirect: 'http://localhost:3000/#/dashboard/',
     failureRedirect: 'http://localhost:3000/#/'
 }))
 app.get('/auth/me', (req, res) => {
